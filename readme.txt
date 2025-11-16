@@ -1,4 +1,4 @@
-# Projet LU2IN006
+# Projet cours de structures de données 
 
 Ce projet a consisté à coder un simulateur de processeur (CPU) en langage C, capable d’interpréter un langage assembleur simplifié. Le programme gère différents segments mémoire , un ensemble de registres, plusieurs modes d’adressage, ainsi que l’exécution d’instructions classiques telles que MOV, ADD, CMP,  JMP...
 L’objectif était de reproduire une version simplifiée du fonctionnement d’un CPU, tout en respectant les contraintes de gestion mémoire et de traitement séquentiel de ce dernier.
@@ -73,4 +73,5 @@ Dans le main notamment, chaque étape des jeux de test est expliquée.
 (Les annotations du dernier jeu de test (pour segcode.c) ne sont pas présentes)
 
 Nous avons fourni 2 fichiers test en langage assembleur, chacun peut-être essayé. Nous avons laissé le test sur le fichier texte le plus complet.
+
 
