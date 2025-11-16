@@ -1,0 +1,12 @@
+.DATA
+x INT 5
+y INT 5
+.CODE
+MOV AX, x
+ADD AX, y
+MOV x, AX
+CMP x, 10
+JZ set_y
+HALT
+set_y: MOV y, 99
+HALT
