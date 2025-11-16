@@ -59,7 +59,7 @@ This file (assembler file) is used in the main program to create a parser.
 This file (the current file) contains a description of the project and the files that comprise it.
 
 ### 11. ‘exo7.c’
-This file contains the answers to exercise 7, which are normally present in other files, but due to lack of time we were unable to make it work properly. 
+This file contains the answers to exercise 7, which are normally present in other files.
 
 ## Instructions for compiling and running the project
 
