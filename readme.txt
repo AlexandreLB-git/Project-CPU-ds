@@ -1,76 +1,59 @@
-# Projet cours de structures de données 
+# CPU Simulator in C
 
-Ce projet a consisté à coder un simulateur de processeur (CPU) en langage C, capable d’interpréter un langage assembleur simplifié. Le programme gère différents segments mémoire , un ensemble de registres, plusieurs modes d’adressage, ainsi que l’exécution d’instructions classiques telles que MOV, ADD, CMP,  JMP...
-L’objectif était de reproduire une version simplifiée du fonctionnement d’un CPU, tout en respectant les contraintes de gestion mémoire et de traitement séquentiel de ce dernier.
+A simplified CPU simulator written in C that interprets a reduced assembly language. The program models core components of a processor: multiple memory segments, a register set, several addressing modes, and sequential execution of classic instructions such as `MOV`, `ADD`, `CMP`, and `JMP`.
 
-Notre projet est composé de 14 fichiers de code, un Makefile et de 3 fichiers textes :
+The goal was to reproduce a simplified model of how a CPU operates, while respecting realistic constraints on memory management and sequential instruction processing.
 
-## Fichiers du projet
+## Overview
 
-### 1. Fichiers répondant aux questions de l'Exercice 1– Implémentation d’une table de hachage générique
+The project is built around a generic hash table, a dynamic memory handler, a parser for a pseudo-assembly language, and an execution engine. Together these components load a program from a text file, resolve its operands and addressing modes, and run it instruction by instruction on the simulated CPU.
 
-'hach.h' et 'hach.h':
-Ces fichiers contiennent les déclarations des structures de HashEntry et Hashmap,
-les signatures des fonctions qui manipulent une Hashmap (création, insertion, suppression, destruction, affichage d'une Hashmap) et leurs définitions dans le .c.
+## Project structure
 
+The project consists of 14 source files, a `Makefile`, and 3 text files.
 
-### 2. Fichiers répondant aux questions de l'Exercice 2– Gestion dynamique de la mémoire
+### Hash table (generic)
+`hash.h` / `hash.c` — Declarations for the `HashEntry` and `Hashmap` structures, plus the functions that operate on a hashmap: creation, insertion, deletion, destruction, and display.
 
-'memo.h' et 'memo.c':
-Ces fichier contiennent les déclarations des structures de Segment et MemoryHandler, les signatures des fonctions qui manipulent ces structures et leurs définitions (dans le .c).
+### Dynamic memory management
+`memo.h` / `memo.c` — Declarations for the `Segment` and `MemoryHandler` structures and the functions that manipulate them.
 
-### 3. Fichiers répondant aux questions de l' Exercice 3– Conception d’un parser pour un langage pseudo-assembleur
+### Pseudo-assembly parser
+`parser.h` / `parser.c` — Declarations for the `Instruction` and `ParserResult` structures and the functions that build and manipulate them.
 
-'parser.h' et 'parser.c':
-Ces fichiers contiennent les déclarations des structures d' Instruction et ParserResult, les signatures des fonctions qui manipulent ces structures et leurs définitions (dans le .c).
+### CPU core
+`cpu.h` / `cpu.c` — Declaration of the `CPU` structure and the functions that operate on it, including data segment allocation.
 
-### 4. Fichiers répondant aux questions de l'Exercice 4– Allocation d’un segment de données
+### Addressing modes (regular expressions)
+`regexadr.h` / `regexadr.c` — Functions that identify the different addressing modes of the pseudo-assembly language, determining how each operand should be interpreted.
 
-'cpu.h' et 'cpu.c':
+### Code segment and execution
+`segcode.h` / `segcode.c` — Functions that allocate the code segment and allow the simulated CPU to execute a loaded program.
 
-Ces fichiers contiennent la déclaration de structure de CPU et les signatures et défintions des fonctions qui manipulent des CPU.
+### Entry point and tests
+`main.c` — Contains all test suites for the project. Four separate test suites each exercise a distinct part of the code. Each one is introduced by a comment of the form `// TEST DE FICHIER.C`.
 
+### Build and data files
+- `Makefile` — Automates compilation: contains the rules needed to compile the source files and produce the executable.
+- `test_parse.txt` / `test_parse1.txt` — Sample assembly files used by `main.c` to build a parser. Two test files are provided; either can be used.
+- `exo7.c` — Contains work for exercise 7, which was intended to be integrated into the other files. Due to time constraints, this part is not fully functional.
 
-### 5. Fichiers répondant aux questions de l'Exercice 5– Expressions régulières et résolution d’adressage
+## Build and run
 
-'regexadr.h' et 'regexadr.c'
+1. Uncomment the `/* */` block for the test suite you want to run.
+2. Compile the project with `make all`.
+3. Run the generated executable with `./main`.
 
-Ces fichiers contiennent les signatures et déclarations des fonctions qui identifient les différents modes d’adressage en pseudo-assembleur afin de déterminer comment une opérande doit être interprétée.
+The source files are commented throughout to make the code easier to follow. In `main.c` in particular, each step of every test suite is explained.
 
+## Notes
 
-### 6. Fichiers répondant aux questions de l'Exercice 6– Allocation d’un segment de codes et exécution
+- The comments for the final test suite (`segcode.c`) are not included.
+- Two assembly test files are provided; the test left active in `main.c` uses the more complete one.
 
-'segcode.h' et 'segcode.c'
+## Concepts covered
 
-Ces fichiers contiennent les signatures et déclarations des fonctions qui permettent à notre CPU simulé d'exécuter du code.
-
-### 7. 'main.c'
-
-Ce fichier contient tous les jeux de tests en lien avec notre projet, 4 jeux de test ont été effectués permettant de tester chacun une partie du code. 
-Ils sont introduits comme suit :'//TEST DE FICHIER.C'
-
-### 8. 'Makefile'
-Ce fichier est utilisé pour automatiser la compilation du projet. Il contient les règles nécessaires pour compiler les fichiers source et générer l'exécutable.
-
-### 9. 'test_parse.txt' et 'test_parse1.txt"
-Ce fichier (fichier assembleur) est utilisé dans le main pour créer un parser
-
-### 10. 'readme.txt'
-Ce fichier (le fichier actuel) contient une description du projet et des fichiers qui le composent.
-
-### 11. 'exo7.c'
-Ce fichier contient les réponses à l'exercice 7 qui sont normalement présentes dans d'autres fichiers, mais par manque de temps nous n'avons pas pu faire en sorte que cela fonctionne correctement. 
-
-## Instructions pour compiler et exécuter le projet
-
-1. Supprimez les annoations /* */ associées au jeu de test que vous voulez essayer.
-2. Exécutez la commande 'make all' pour compiler tous les fichiers du projet.
-3. Lancez l'exécutable généré avec './main'.
-
-Des annotations sont présentes sur tous les fichiers afin de faciliter la compréhension.
-Dans le main notamment, chaque étape des jeux de test est expliquée.
-
-(Les annotations du dernier jeu de test (pour segcode.c) ne sont pas présentes)
+Generic hash tables, dynamic memory allocation and segment management, lexical parsing of an assembly-like language, addressing-mode resolution via regular expressions, and a sequential fetch–decode–execute cycle.
 
 Nous avons fourni 2 fichiers test en langage assembleur, chacun peut-être essayé. Nous avons laissé le test sur le fichier texte le plus complet.
 
